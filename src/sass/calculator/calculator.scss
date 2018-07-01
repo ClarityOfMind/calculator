@@ -1,0 +1,77 @@
+.calculator {
+    width: 100%;
+    border-radius: 20px;
+    background:  var(--calculator-bg-color);
+    overflow: hidden;
+    box-shadow: 0px 0 24px -4px var(--main-text-color);
+    transition: all 0.2s ease;
+
+    &-display {
+        padding: 15px 15px;
+        font-size: 30px;
+        color: var(--main-text-color);
+    }
+
+    &-operatorKey {
+        width: 100%;
+        background: var(--operatorButton-bg-color);
+        border: none;
+        padding: 15px 10px;
+        font-size: 35px;
+        color: #000;
+        transition: all 0.2s ease;
+        
+        &--isPressed {
+            background: #ccccff;
+            box-shadow: inset 0px 0px 9px -4px #000;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-digitKey {
+        border: none;
+        padding: 15px 10px;
+        background: var(--calculator-bg-color);
+        font-size: 35px;
+        color: var(--main-text-color);
+        transition: all 0.2s ease;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-equalKey {
+        width: 100%;
+        height: 100%;
+        border: none;
+        color: #000;
+        background: var(--equalButton-bg-color);
+        font-size: 35px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    button {
+        &:focus {
+           outline: none;
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .calculator {
+        &-operatorKey,
+        &-digitKey,
+        &-equalKey {
+            font-size: 20px;
+        }
+
+    }
+}
