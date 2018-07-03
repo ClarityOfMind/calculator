@@ -5,8 +5,11 @@ require('bootstrap');
 const calculator  = document.querySelector('.calculator');
 const keys        = calculator.querySelector('.calculator-keys');
 const display     = document.querySelector('.calculator-display');
+const subDisplay  = document.querySelector('.calculator-subDisplay');
 const operators   = document.getElementsByClassName('calculator-operatorKey');
 const clearButton = calculator.querySelector('[data-action=clear]');
+var subDisplayContent = '';
+
 
 //Calculate function 
 
@@ -19,6 +22,12 @@ const calculate = (operand1, operator, operand2) => {
     if (operator === 'multiply') {return Value1 * Value2};
     if (operator === 'divide') {return Value1 / Value2};
 }
+
+// Percentage calculate function 
+
+const calculatePercentage = (firstValue, displayedValue) => {
+    return +(firstValue / 100 * displayedValue).toFixed(10);
+};
 
 keys.addEventListener ('click', e => {
     if (e.target.matches('button')) {
@@ -39,7 +48,10 @@ keys.addEventListener ('click', e => {
                 previousKeyType === 'calculate'
             ) {
                 display.textContent = keyValue;
-            } else if (displayedValue.length < 25) {
+            } else if (previousKeyType === 'percentage') {
+                subDisplay.textContent = subDisplayContent ;
+                display.textContent = keyValue;
+            } else {
                 display.textContent = displayedValue + keyValue;
             };
 
@@ -70,8 +82,9 @@ keys.addEventListener ('click', e => {
                 calculator.dataset.firstValue = result;
             } else {
                 calculator.dataset.firstValue = displayedValue;
+                
             }
-
+            subDisplay.textContent += ' ' + displayedValue + ' ' + keyValue;
             key.classList.add('calculator-operatorKey--isPressed');
             calculator.dataset.previousKeyType = 'operator';
             calculator.dataset.operator = action;  
@@ -81,10 +94,10 @@ keys.addEventListener ('click', e => {
 
         if (action === 'decimal') {  
             if (!displayedValue.includes('.') && previousKeyType === 'number') {
-                display.textContent = displayedValue + '.';
+                display.textContent = displayedValue + ',';
             } 
             if (previousKeyType === 'operator' || previousKeyType === 'calculate') {
-                display.textContent = '0.';
+                display.textContent = '0,';
             }
 
             calculator.dataset.previousKeyType = 'decimal';
@@ -102,6 +115,7 @@ keys.addEventListener ('click', e => {
                 calculator.dataset.carriedSecondValue = ''
                 calculator.dataset.operator = ''
                 calculator.dataset.previousKeyType = ''
+                subDisplay.textContent = '';
             }
             display.textContent = '0';
             key.textContent = 'AC'
@@ -123,8 +137,35 @@ keys.addEventListener ('click', e => {
 
                 display.textContent = +calculate(firstValue, operator, secondValue).toFixed(10);
             };
-            calculator.dataset.carriedSecondValue = secondValue;                                      
+            calculator.dataset.carriedSecondValue = secondValue;
+            subDisplay.textContent = '';                                      
             calculator.dataset.previousKeyType = 'calculate';
+        }
+
+        //This block of code is executed when clicked percentage button
+
+        if (action === 'percentage') {  
+            const firstValue = calculator.dataset.firstValue;
+            const operator = calculator.dataset.operator;
+            const secondValue = calculatePercentage(firstValue, displayedValue);
+            
+            if(previousKeyType === 'operator' || previousKeyType === 'number') {
+                subDisplayContent = subDisplay.textContent;
+                display.textContent = secondValue;
+                subDisplay.textContent += ' ' + secondValue;
+            } else if (previousKeyType === 'percentage') {
+                display.textContent = secondValue;
+                subDisplay.textContent = subDisplayContent + ' ' + secondValue;
+            } else if (previousKeyType === 'calculate') {
+                calculator.dataset.firstValue = displayedValue;
+                subDisplay.textContent  = calculatePercentage(displayedValue, displayedValue);
+                display.textContent  = calculatePercentage(displayedValue, displayedValue);     
+            } else {
+                display.textContent = '0';
+                subDisplay.textContent = '0';
+            }
+
+            calculator.dataset.previousKeyType = 'percentage';    
         }
     }
 });
@@ -147,13 +188,13 @@ modeSwitcher.addEventListener ('click', () => {
             });
 
             document.body.style.setProperty('--calculator-bg-color', '#000000');
-            document.body.style.setProperty('--header-bg-color', 'linear-gradient(#0d0d0d, #737373)');
-            document.body.style.setProperty('--footer-bg-color', 'linear-gradient(#737373, #0d0d0d');
             document.body.style.setProperty('--main-text-color', '#ffffff');
             document.body.style.setProperty('background-color', '#737373');
             document.body.style.setProperty('--operatorButton-bg-color', '#e6e6e6');
             document.body.style.setProperty('--equalButton-bg-color', '#ff6600');
             document.body.style.setProperty('--logo-color', '#ffffff');
+            document.body.style.setProperty('--modeSwitcher-bg-color', '#ff6600');
+            document.querySelector('.calculator-extendedKeys').style.setProperty('display', 'none');
             
             mode = 'night'
         } else {
@@ -167,14 +208,13 @@ modeSwitcher.addEventListener ('click', () => {
                 });
 
                 document.body.style.setProperty('--calculator-bg-color', '#ffffff');
-                document.body.style.setProperty('--header-bg-color', 'linear-gradient(#4ddbff, #ffffff');
-                document.body.style.setProperty('--footer-bg-color', 'linear-gradient(#ffffff, #4ddbff');
                 document.body.style.setProperty('--main-text-color', '#000000');
                 document.body.style.setProperty('background-color', '#ffffff');
-                document.body.style.setProperty('--operatorButton-bg-color', '#4ddbff');
-                document.body.style.setProperty('--equalButton-bg-color', '#4ddbff');
+                document.body.style.setProperty('--operatorButton-bg-color', '#e6f2ff');
+                document.body.style.setProperty('--equalButton-bg-color', '#e6f2ff');
                 document.body.style.setProperty('--logo-color', '#000000');
-
+                document.body.style.setProperty('--modeSwitcher-bg-color', '#737373');
+                document.querySelector('.calculator-extendedKeys').style.setProperty('display', 'block');
                 mode = 'day'    
         }
 

@@ -1,15 +1,22 @@
 .calculator {
     width: 100%;
-    border-radius: 20px;
     background:  var(--calculator-bg-color);
     overflow: hidden;
     box-shadow: 0px 0 24px -4px var(--main-text-color);
     transition: all 0.2s ease;
+    color: var(--main-text-color);
+    padding-top: 10px;
 
     &-display {
-        padding: 15px 15px;
-        font-size: 30px;
-        color: var(--main-text-color);
+        padding: 0px 15px 15px 15px;
+        font-size: 40px;
+        
+    }
+
+    &-subDisplay {
+        padding: 0px 18px 0 18px;
+        font-size: 18px;
+        height: 20px;   
     }
 
     &-operatorKey {
@@ -44,6 +51,13 @@
         }
     }
 
+    &-extendedKeys {
+
+    }
+
+    &-extendedKey {
+        
+    }
     &-equalKey {
         width: 100%;
         height: 100%;

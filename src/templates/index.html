@@ -63,7 +63,7 @@
                         </g>    
                     </svg>
                 </div>
-                <div class="col-AUTO">
+                <div class="col-auto">
                     <h1 class="header-title">Web Calculator</h1>
                 </div>
                 <div class="header-modeSwitcher col-auto">
@@ -86,6 +86,7 @@
     </header>
     <div class="container container-720">
         <div class="calculator">
+            <div class="calculator-subDisplay text-right"></div>
             <div class="calculator-display text-right">0</div>
             <div class="calculator-keys">
                 <div class="row no-gutters">
@@ -101,10 +102,13 @@
                     <div class="col text center">
                         <button class="calculator-operatorKey" data-action="divide">÷</button>
                     </div>
+                    <div class="col text center">
+                        <button class="calculator-operatorKey" data-action="percentage">%</button>
+                    </div>
                 </div><!-- row -->
                 <div class="row no-gutters">
-                    <div class="col-9">
-                        <div class="row no-gutters">
+                    <div class="col-8">
+                        <div class="row no-gutters align-items-stretch">
                             <button class=" calculator-digitKey col-4">7</button>
                             <button class=" calculator-digitKey col-4">8</button>
                             <button class=" calculator-digitKey col-4">9</button>
@@ -119,7 +123,26 @@
                             <button class=" calculator-digitKey col-4" data-action="clear">AC</button>
                         </div><!-- row -->
                     </div>
-                    <div class="col-3">
+                    <div class="col-2 calculator-extendedKeys">
+                        <div class="row no-gutters">
+                            <div class="col-12">
+                                <button class="calculator-operatorKey">sqr</button>
+                            </div>
+                            <div class="col-12">
+                                <button class="calculator-operatorKey">&radic;</button>
+                            </div>
+                            <div class="col-12">
+                                <button class="calculator-operatorKey">n!</button>
+                            </div>
+                            <div class="col-12">
+                                <button class="calculator-operatorKey">log</button>
+                            </div>
+                            <div class="col-12">
+                                <button class="calculator-operatorKey">хуй</button>
+                            </div>
+                        </div><!-- row -->
+                    </div>
+                    <div class="col">
                         <button class="calculator-equalKey" data-action="calculate">=</button>
                     </div>
                 </div><!-- row -->

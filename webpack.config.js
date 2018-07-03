@@ -65,11 +65,11 @@ var customConfiguration = function webpackConfig() {
             template: 'src/templates/index.html'
         }),
 
-        /* new CopyWebpackPlugin([
+        new CopyWebpackPlugin([
             //{ from: "src/css/index.css" },
             { from: 'src/assets', to: 'assets' },
-            { from: 'userfiles', to: 'userfiles' }
-        ]) */
+            //{ from: 'userfiles', to: 'userfiles' }
+        ]) 
     ];
 
     return config;
