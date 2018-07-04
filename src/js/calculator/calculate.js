@@ -1,6 +1,6 @@
 'use strict';
 
-exports = function calculate (operand1, operator, operand2) {
+ var calculate = function (operand1, operator, operand2) {
     let Value1 = parseFloat(operand1);
     let Value2 = parseFloat(operand2);
 
@@ -11,3 +11,4 @@ exports = function calculate (operand1, operator, operand2) {
 }
 
  
+module.exports = calculate;

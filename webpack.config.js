@@ -20,6 +20,10 @@ var customConfiguration = function webpackConfig() {
 
     config.devtool = 'source-map';
     
+    /* config.resolve = {
+        extensions: ['*','js']
+    }; */
+
     config.module = {
         rules: [
             {

@@ -9,7 +9,7 @@
     "clean:dist": "rimraf -- dist .awcache",
     "sass": "node-sass \"src/sass/index.scss\" \"dist/index.css\" --include-path node_modules --output-style compressed -q",
     "sass:watch": "node-sass -w  \"src/sass/index.scss\" \"dist/index.css\"  --source-map true --include-path node_modules --output-style compressed -q",
-    "build:dev": "npm run clean:dist && webpack -d",
+    "build:dev": "npm run clean:dist && webpack -d --display-error-details",
     "build:prod": "npm run clean:dist && npm run sass && webpack -p",
     "watch:dev": "npm-run-all -p -r \"build:dev -- --watch\" sass:watch",
     "watch:prod": "npm-run-all -p -r \"build:prod -- --watch\" sass:watch"
