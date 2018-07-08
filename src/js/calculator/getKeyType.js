@@ -8,7 +8,8 @@ function getKeyType (key) {
         action === 'add' ||
         action === 'subtract' ||
         action === 'multiply' ||
-        action === 'divide'
+        action === 'divide' ||
+        action === 'nthRoot'
     ) return 'operator';
 
     if (

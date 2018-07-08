@@ -30,8 +30,6 @@ function updateState (key, calculatedValue, displayedValue, state, subDisplay, s
         previousKeyType !== 'calculate'
         ? calculatedValue
         : displayedValue;
-
-        state.isNthRoot === false  
     };
 
     //This block of code is executed when clicked clearance button
@@ -46,17 +44,7 @@ function updateState (key, calculatedValue, displayedValue, state, subDisplay, s
         state.secondValue = firstValue && previousKeyType === 'calculate'
         ? secondValue
         : displayedValue;
-        
-        state.isNthRoot === false  
     };
-
-    //This block of code is executed when clicked nth root button
-
-    if (keyType === 'nthRoot') {
-        state.operator = key.dataset.action; 
-        state.firstValue = displayedValue;
-        state.isNthRoot = true;
-    }
 };
 
 export default updateState;

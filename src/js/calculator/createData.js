@@ -11,6 +11,7 @@ from './calculation';
 
 var subDisplayBuffer = '';
 var scientificKeyBuffer = '';
+var scientificKeyBuffer = '';
 
 function createData (key, displayedValue, subDisplayedValue, state, subDisplay,) {
 
@@ -62,8 +63,8 @@ function createData (key, displayedValue, subDisplayedValue, state, subDisplay,)
         if (firstValue && 
             operator &&
             previousKeyType !== 'operator' && 
-            previousKeyType !== 'calculate' ||
-            state.isNthRoot === true    
+            previousKeyType !== 'calculate'
+
         ) {
             var result = +calculate(firstValue, operator, displayedValue).toFixed(10);
         }
@@ -141,16 +142,6 @@ function createData (key, displayedValue, subDisplayedValue, state, subDisplay,)
             return {mainDisplay: Math.abs(value)}
         } else return {mainDisplay: value * -1}
     };
-
-    //This block of code is executed when clicked nth root button
-
-    if (keyType === 'nthRoot') {
-        if (previousKeyType !== 'nthRoot') {
-            return {secondDisplay: displayedValue + ' ' + sign}
-        };
-        return {mainDisplay: displayedValue}
-    }
-
 };
 
 export default createData;
