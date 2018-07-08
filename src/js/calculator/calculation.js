@@ -9,6 +9,7 @@ function calculate (operand1, operator, operand2) {
     if (operator === 'subtract') {return Value1 - Value2};
     if (operator === 'multiply') {return Value1 * Value2};
     if (operator === 'divide') {return Value1 / Value2};
+    if (operator === 'nthRoot') {return calculateNthRoot(Value1, Value2)};
 };
 
 //Makes calculations with scientific operators
@@ -34,10 +35,18 @@ function calculateFactorial (value) {
     return (value != 1) ? value * calculateFactorial(value - 1) : 1
 };
 
+function calculateNthRoot(value, exponent) {
+    if (value < 0 && n % 2 === 1)
+        return -Math.pow(-value, 1/exponent);
+    else
+        return Math.pow(value, 1/exponent)
+}
+
 export {calculate,
     scientificCalculate, 
     calculatePercentage,
-    calculateFactorial}
+    calculateFactorial,
+    calculateNthRoot}
 
 
  

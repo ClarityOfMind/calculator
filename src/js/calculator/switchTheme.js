@@ -9,11 +9,11 @@ themeSwitcher.addEventListener ('click', () => {
         if (theme === 'day') {
             var themeAnimation = themeButton.animate([
                 {transform: 'translateX(0)'},
-                {transform: 'translateX(26px)'}
+                {transform: 'translateX(18px)'}
             ],100);
 
             themeAnimation.addEventListener('finish', () => {
-                themeButton.style.transform = 'translateX(26px)';
+                themeButton.style.transform = 'translateX(18px)';
             });
 
             document.body.style.setProperty('--calculator-bg-color', '#000000');
@@ -38,10 +38,10 @@ themeSwitcher.addEventListener ('click', () => {
                 document.body.style.setProperty('--calculator-bg-color', '#ffffff');
                 document.body.style.setProperty('--main-text-color', '#000000');
                 document.body.style.setProperty('background-color', '#ffffff');
-                document.body.style.setProperty('--operatorButton-bg-color', '#e6f2ff');
-                document.body.style.setProperty('--equalButton-bg-color', '#737373');
+                document.body.style.setProperty('--operatorButton-bg-color', '#9fbfdf');
+                document.body.style.setProperty('--equalButton-bg-color', '#9fbfdf');
                 document.body.style.setProperty('--logo-color', '#000000');
-                document.body.style.setProperty('--themeSwitcher-bg-color', '#737373');
+                document.body.style.setProperty('--themeSwitcher-bg-color', '#9fbfdf');
                 theme = 'day'    
         }
     });

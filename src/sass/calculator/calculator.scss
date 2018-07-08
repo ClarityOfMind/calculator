@@ -1,22 +1,25 @@
 .calculator {
-    width: 100%;
+    max-width: 320px;
     background:  var(--calculator-bg-color);
-    overflow: hidden;
     box-shadow: 0px 0 24px -4px var(--main-text-color);
     transition: all 0.2s ease;
     color: var(--main-text-color);
     padding-top: 10px;
+    margin: auto;
 
     &-display {
-        padding: 0px 15px 15px 15px;
-        font-size: 40px;
-        
+        padding-right: 10px;
+        font-size: 30px;
+        height: 45px;
+        padding-right: 10px;
+       
     }
 
     &-subDisplay {
-        padding: 0px 18px 0 18px;
+        padding-right: 10px;
         font-size: 18px;
-        height: 20px;   
+        height: 20px; 
+        transform-origin: right;  
     }
 
     &-operatorKey {
@@ -24,7 +27,7 @@
         background: var(--operatorButton-bg-color);
         border: none;
         padding: 15px 10px;
-        font-size: 35px;
+        font-size: 25px;
         color: #000;
         transition: all 0.2s ease;
         
@@ -42,7 +45,7 @@
         border: none;
         padding: 15px 10px;
         background: var(--calculator-bg-color);
-        font-size: 35px;
+        font-size: 25px;
         color: var(--main-text-color);
         transition: all 0.2s ease;
 
@@ -52,27 +55,25 @@
     }
 
     &-extendedKeys {
-        /* display: none; */
+         display: none;
     }
 
-    &-extendedKey {
-        
-    }
     &-equalKey {
         width: 100%;
         height: 100%;
         border: none;
         color: #000;
         background: var(--equalButton-bg-color);
-        font-size: 35px;
+        font-size: 30px;
         transition: all 0.2s ease;
-
+        padding: 11px 0;
         &:hover {
             cursor: pointer;
         }
     }
 
     button {
+        width: 100%;
         &:focus {
            outline: none;
         }

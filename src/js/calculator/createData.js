@@ -5,6 +5,7 @@ import {
     calculate,
     scientificCalculate,
     calculatePercentage,
+    calculateNthRoot
     } 
 from './calculation';
 
@@ -30,7 +31,8 @@ function createData (key, displayedValue, subDisplayedValue, state, subDisplay,)
     if (keyType === 'number') {
         if (displayedValue === '0' || 
             previousKeyType === 'operator' ||
-            previousKeyType === 'calculate'
+            previousKeyType === 'calculate'||
+            previousKeyType === 'nthRoot'
         ) {
             return  {mainDisplay: keyValue} 
         } else if (previousKeyType === 'percentage') {
@@ -60,7 +62,8 @@ function createData (key, displayedValue, subDisplayedValue, state, subDisplay,)
         if (firstValue && 
             operator &&
             previousKeyType !== 'operator' && 
-            previousKeyType !== 'calculate'
+            previousKeyType !== 'calculate' ||
+            state.isNthRoot === true    
         ) {
             var result = +calculate(firstValue, operator, displayedValue).toFixed(10);
         }
@@ -117,18 +120,37 @@ function createData (key, displayedValue, subDisplayedValue, state, subDisplay,)
     //This block of code is executed when clicked scientific operator button
     
     if (keyType === 'scientificOperator') {
-            state.scientificOperator = key.dataset.action;
+        state.scientificOperator = key.dataset.action;
                     
-            if (previousKeyType !== 'scientificOperator') {
-                state.prosessedValue = displayedValue;
-                subDisplayBuffer = subDisplayedValue;
-                scientificKeyBuffer = ' ' + sign + '(' + state.prosessedValue + ')';
-                return {mainDisplay: scientificCalculate(state.scientificOperator, displayedValue), secondDisplay: subDisplayBuffer + scientificKeyBuffer};     
-            } else {
-                scientificKeyBuffer = ' ' + sign + '(' + scientificKeyBuffer + ')';
-            }    
-            return {mainDisplay: scientificCalculate(state.scientificOperator, displayedValue), secondDisplay: subDisplayBuffer + scientificKeyBuffer};
+        if (previousKeyType !== 'scientificOperator') {
+            state.prosessedValue = displayedValue;
+            subDisplayBuffer = subDisplayedValue;
+            scientificKeyBuffer = ' '+ sign + '(' + state.prosessedValue + ')';
+            return {mainDisplay: scientificCalculate(state.scientificOperator, displayedValue), secondDisplay: subDisplayBuffer + scientificKeyBuffer};     
+        } else {
+            scientificKeyBuffer = ' ' + sign + '(' + scientificKeyBuffer + ')';
+        }    
+        return {mainDisplay: scientificCalculate(state.scientificOperator, displayedValue), secondDisplay: subDisplayBuffer + scientificKeyBuffer};
+    };
+
+    //This block of code is executed when clicked sign changing button
+
+    if (keyType === 'changeSign') {
+        let value = parseFloat(displayedValue);
+        if (value < 0) {
+            return {mainDisplay: Math.abs(value)}
+        } else return {mainDisplay: value * -1}
+    };
+
+    //This block of code is executed when clicked nth root button
+
+    if (keyType === 'nthRoot') {
+        if (previousKeyType !== 'nthRoot') {
+            return {secondDisplay: displayedValue + ' ' + sign}
         };
+        return {mainDisplay: displayedValue}
+    }
+
 };
 
 export default createData;

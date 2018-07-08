@@ -71,23 +71,17 @@
                         <div class="header-modeSwitcher col-auto">
                             <div class="row">
                                 <div class="col">
-                                    <div class="header-modeName">Normal</div>
-                                </div>
-                                <div class="col">
                                     <div class="header-modeSwitcherFrame">
                                         <div class="header-modeSwitcherButton"></div>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="header-modeName">Engineering</div>
+                                    <div class="header-modeName">Scientific</div>
                                 </div>
                             </div><!-- row -->
                         </div>
                         <div class="header-themeSwitcher col-auto">
                             <div class="row">
-                                <div class="col">
-                                    <div class="header-themeName">Day</div>
-                                </div>
                                 <div class="col">
                                     <div class="header-themeSwitcherFrame">
                                         <div class="header-themeSwitcherButton"></div>
@@ -109,40 +103,62 @@
             <div class="calculator-display text-right">0</div>
             <div class="calculator-keys">
                 <div class="row no-gutters">
-                    <div class="col text center">
-                        <button class="calculator-operatorKey" data-action="add">+</button>
-                    </div>
-                    <div class="col text center">
-                        <button class="calculator-operatorKey" data-action="subtract">-</button>
-                    </div>
-                    <div class="col text center">
-                        <button class="calculator-operatorKey" data-action="multiply">&times;</button>
-                    </div>
-                    <div class="col text center">
-                        <button class="calculator-operatorKey" data-action="divide">÷</button>
-                    </div>
-                    <div class="col text center">
-                        <button class="calculator-operatorKey" data-action="percentage">%</button>
-                    </div>
-                </div><!-- row -->
-                <div class="row no-gutters">
-                    <div class="col">
+                    <div class="col-8">
                         <div class="row no-gutters">
-                            <button class=" calculator-digitKey col-4">7</button>
-                            <button class=" calculator-digitKey col-4">8</button>
-                            <button class=" calculator-digitKey col-4">9</button>
-                            <button class=" calculator-digitKey col-4">4</button>
-                            <button class=" calculator-digitKey col-4">5</button>
-                            <button class=" calculator-digitKey col-4">6</button>
-                            <button class=" calculator-digitKey col-4">1</button>
-                            <button class=" calculator-digitKey col-4">2</button>
-                            <button class=" calculator-digitKey col-4">3</button>
-                            <button class=" calculator-digitKey col-4">0</button>
-                            <button class=" calculator-digitKey col-4" data-action="decimal">.</button>
-                            <button class=" calculator-digitKey col-4" data-action="clear">AC</button>
+                                <div class="col-12">
+                                    <div class="row no-gutters text-center">
+                                        <div class="col-4">
+                                            <button class="calculator-operatorKey" data-action="clear">AC</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="calculator-operatorKey" data-action="changeSign">±</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="calculator-operatorKey" data-action="percentage">%</button>
+                                        </div>
+                                    </div><!-- row -->
+                                </div>
+                                <div class="col-12">
+                                    <div class="row no-gutters text-center">
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">7</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">8</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">9</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">4</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">5</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">6</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">1</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">2</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey">3</button>
+                                        </div>
+                                        <div class="col-8">
+                                            <button class=" calculator-digitKey">0</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class=" calculator-digitKey" data-action="decimal">.</button>
+                                        </div>    
+                                    </div><!-- row -->
+                                </div>
                         </div><!-- row -->
+                        <div class="row"></div>
                     </div>
-                    <div class="col-2 calculator-extendedKeys">
+                    <div class="col calculator-extendedKeys">
                         <div class="row no-gutters">
                             <div class="col-12">
                                 <button class="calculator-operatorKey" data-sign ="sqr" data-action="exponentiation">x <sup>2</sup></button>
@@ -150,9 +166,9 @@
                             <div class="col-12">
                                 <button class="calculator-operatorKey" data-sign ="&radic;" data-action="sqrRoot">&radic;</button>
                             </div>
-                            <!-- <div class="col-12">
-                                <button class="calculator-operatorKey" data-sign ="" data-action="">1/n</button>
-                            </div> -->
+                            <div class="col-12">
+                                <button class="calculator-operatorKey" data-sign ="n√" data-action="nthRoot">n√</button>
+                            </div>
                             <div class="col-12">
                                 <button class="calculator-operatorKey" data-sign ="log" data-action="log">log</button>
                             </div>
@@ -161,14 +177,31 @@
                             </div>
                         </div><!-- row -->
                     </div>
-                    <div class="col-3">
-                        <button class="calculator-equalKey" data-action="calculate">=</button>
+
+                    <div class="col">
+                        <div class="row no-gutters">
+                            <div class="col-12 text center">
+                                <button class="calculator-operatorKey" data-action="add">+</button>
+                            </div>
+                            <div class="col-12 text center">
+                                <button class="calculator-operatorKey" data-action="subtract">-</button>
+                            </div>
+                            <div class="col-12 text center">
+                                <button class="calculator-operatorKey" data-action="multiply">&times;</button>
+                            </div>
+                            <div class="col-12 text center">
+                                <button class="calculator-operatorKey" data-action="divide">÷</button>
+                            </div>
+                            <div class="col-12 text center">
+                                <button class="calculator-equalKey" data-action="calculate">=</button>
+                            </div>
+                        </div><!-- row -->
                     </div>
-                </div><!-- row -->
+                </div><!-- row -->   
             </div>
         </div>
     </div><!-- container -->
-    <footer class="footer fixed-bottom">
+    <footer class="footer">
         <div class="container container-720">
             <div class="row justify-content-center">
                 <div class="col-sm-auto">

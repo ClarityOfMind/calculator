@@ -13,6 +13,7 @@ function updateState (key, calculatedValue, displayedValue, state, subDisplay, s
         operator,
         secondValue,
         previousKeyType,
+        isNthRoot,
     } = state
 
     //Sets up identificator of a previous pressed button
@@ -29,6 +30,8 @@ function updateState (key, calculatedValue, displayedValue, state, subDisplay, s
         previousKeyType !== 'calculate'
         ? calculatedValue
         : displayedValue;
+
+        state.isNthRoot === false  
     };
 
     //This block of code is executed when clicked clearance button
@@ -42,8 +45,18 @@ function updateState (key, calculatedValue, displayedValue, state, subDisplay, s
     if (keyType === 'calculate') {
         state.secondValue = firstValue && previousKeyType === 'calculate'
         ? secondValue
-        : displayedValue; 
+        : displayedValue;
+        
+        state.isNthRoot === false  
     };
+
+    //This block of code is executed when clicked nth root button
+
+    if (keyType === 'nthRoot') {
+        state.operator = key.dataset.action; 
+        state.firstValue = displayedValue;
+        state.isNthRoot = true;
+    }
 };
 
 export default updateState;

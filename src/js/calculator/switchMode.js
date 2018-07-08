@@ -10,11 +10,11 @@ modeSwitcher.addEventListener ('click', () => {
         if (mode === 'normal') {
             var modeAnimation = modeButton.animate([
                 {transform: 'translateX(0)'},
-                {transform: 'translateX(26px)'}
+                {transform: 'translateX(18px)'}
             ],100);
 
             modeAnimation.addEventListener('finish', () => {
-                modeButton.style.transform = 'translateX(26px)';
+                modeButton.style.transform = 'translateX(18px)';
             });
 
             calculatorExtendedKeys.style.setProperty('display', 'block');

@@ -20,7 +20,7 @@ function initCalculator (id) {
 
             updateDisplay (displayData, display, subDisplay);
             updateState (key, displayData.mainDisplay, displayedValue, calculator.dataset, subDisplay);
-            updateInterface(key, calculator.dataset, subDisplay, calculator);
+            updateInterface(key, calculator.dataset, display, subDisplay, calculator);
         }
     });
 };
