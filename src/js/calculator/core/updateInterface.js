@@ -1,7 +1,7 @@
 'use strict';
 
-import getKeyType from "./getKeyType";
-import removePressedOperatorButton from './removePressedOperatorButton';
+import getKeyType from "../helpers/getKeyType";
+import removePressedOperatorButton from '../helpers/removePressedOperatorButton';
 
 function updateInterface (key, state, display, subDisplay, calculator) {
     const keyType = getKeyType(key);

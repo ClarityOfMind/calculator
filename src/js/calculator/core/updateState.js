@@ -1,9 +1,9 @@
 'use strict';
 
-import getKeyType from "./getKeyType";
-import clearState from "./clearState";
+import getKeyType from "../helpers/getKeyType";
+import clearState from "../helpers/clearState";
 
-function updateState (key, calculatedValue, displayedValue, state, subDisplay, subDisplayBuffer) {
+function updateState (key, calculatedValue, displayedValue, state, subDisplay) {
 
     //Variables required
 
@@ -13,7 +13,6 @@ function updateState (key, calculatedValue, displayedValue, state, subDisplay, s
         operator,
         secondValue,
         previousKeyType,
-        isNthRoot,
     } = state
 
     //Sets up identificator of a previous pressed button

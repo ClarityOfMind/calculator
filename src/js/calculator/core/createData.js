@@ -1,6 +1,6 @@
 'use strict';
 
-import getKeyType from "./getKeyType";
+import getKeyType from "../helpers/getKeyType";
 import {    
     calculate,
     scientificCalculate,

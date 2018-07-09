@@ -1,9 +1,11 @@
 'use strict';
 
-import createData        from './createData';
-import updateState       from './updateState';
-import updateDisplay     from './updateDisplay';
-import updateInterface   from './updateInterface';
+import createData        from './core/createData';
+import updateState       from './core/updateState';
+import updateDisplay     from './core/updateDisplay';
+import updateInterface   from './core/updateInterface';
+import switchTheme       from '../calculator/theme/switchTheme';
+import switchMode        from '../calculator/theme/switchMode';
 
 function initCalculator (id) {
     const calculator = document.querySelector(id);
@@ -23,6 +25,9 @@ function initCalculator (id) {
             updateInterface(key, calculator.dataset, display, subDisplay, calculator);
         }
     });
+
+    switchTheme ();
+    switchMode ();
 };
 
 export default initCalculator;
