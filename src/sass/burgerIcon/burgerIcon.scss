@@ -1,0 +1,19 @@
+.burgerIcon {
+    width: 30px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-topStripe,
+    &-midStripe,
+    &-bottomStripe {
+        height: 2px;
+        border: 1px solid;
+        border-radius: 1px;
+    }
+
+    &:hover {
+        cursor: pointer
+    }
+}

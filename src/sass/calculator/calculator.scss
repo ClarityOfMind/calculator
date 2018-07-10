@@ -6,6 +6,65 @@
     color: var(--main-text-color);
     padding-top: 10px;
     margin: auto;
+    margin-bottom: 30px;
+    position: relative;
+
+    &-burger {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 9999;
+    }
+
+    &-menu {
+        position: absolute;
+        display: none;
+        top: 0;
+        width: 70%;
+        height: 100%;
+        z-index: 9998;
+        padding-top: 30px;
+        padding-left: 10px;
+        background: #fff;
+        opacity: 0;
+        border-right: 1px solid;
+        transform: translateX(-235px);
+        transition: transform 0.2s ease-in-out;
+
+        &--opened {
+            display: block;
+            transform: translateX(0px);
+            opacity: 0.9;
+        }
+    }
+
+     &-modeSwitcherFrame {
+        margin-top: 20px;
+        padding: 1px 2px;
+        width: 37px;
+        border-radius: 12px;
+        box-shadow: inset 0px 1px 3px 0px #000;
+        background: var(--themeSwitcher-bg-color);
+        position: relative;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:after {
+            content: 'scientific';
+            position: absolute;
+            top: -5px;
+            right: -70px;
+        }
+    }
+
+    &-modeSwitcherButton {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        background-color: #fff;
+    }
 
     &-display {
         padding-right: 10px;
@@ -89,4 +148,4 @@
         }
 
     }
-}
+};

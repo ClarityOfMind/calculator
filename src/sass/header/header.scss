@@ -19,27 +19,10 @@
         font-family: 'IM Fell English SC';
     }
 
-    &-modeName {
-        margin-top: 16px;
-        font-size: 14px;
-    }
 
     &-themeName {
         margin-top: 16px;
         font-size: 14px;
-    }
-
-    &-modeSwitcherFrame {
-        margin-top: 20px;
-        padding: 1px 2px;
-        width: 37px;
-        border-radius: 12px;
-        box-shadow: inset 0px 1px 3px 0px #000;
-        background: var(--themeSwitcher-bg-color);
-
-        &:hover {
-            cursor: pointer;
-        }
     }
 
     &-themeSwitcherFrame {
@@ -53,12 +36,6 @@
         &:hover {
             cursor: pointer;
         }
-    }
-    &-modeSwitcherButton {
-        height: 15px;
-        width: 15px;
-        border-radius: 50%;
-        background-color: #fff;
     }
     
     &-themeSwitcherButton {

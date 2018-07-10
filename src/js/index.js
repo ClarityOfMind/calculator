@@ -2,4 +2,5 @@
 
 import initCalculator    from './calculator/calculator';
 
-initCalculator('.calculator')
+initCalculator('#calc1');
+initCalculator('#calc2');

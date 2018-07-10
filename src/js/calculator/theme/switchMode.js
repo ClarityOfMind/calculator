@@ -1,11 +1,11 @@
 'use strict';
 
-function switchMode () {
-    var modeSwitcher = document.querySelector('.header-modeSwitcherFrame');
-    var mode ='normal';
-
+function switchMode() {
+    let modeSwitcher = document.querySelector('.calculator-modeSwitcherFrame');
+    var mode = 'normal';
+    
 modeSwitcher.addEventListener ('click', () => {
-    var modeButton = document.querySelector('.header-modeSwitcherButton');
+    var modeButton = document.querySelector('.calculator-modeSwitcherButton');
     var calculatorExtendedKeys = document.querySelector('.calculator-extendedKeys');
         if (mode === 'normal') {
             var modeAnimation = modeButton.animate([

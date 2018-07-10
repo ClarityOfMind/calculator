@@ -6,9 +6,10 @@ import updateDisplay     from './core/updateDisplay';
 import updateInterface   from './core/updateInterface';
 import switchTheme       from '../calculator/theme/switchTheme';
 import switchMode        from '../calculator/theme/switchMode';
+import openMenu          from './helpers/openMenu'
 
 function initCalculator (id) {
-    const calculator = document.querySelector(id);
+    const calculator = document.querySelector(`${id} .calculator`);
     const keys       = calculator.querySelector('.calculator-keys');
     const display    = calculator.querySelector('.calculator-display');
     const subDisplay = calculator.querySelector('.calculator-subDisplay');
@@ -27,7 +28,8 @@ function initCalculator (id) {
     });
 
     switchTheme ();
-    switchMode ();
+    switchMode();
+    openMenu(calculator);
 };
 
 export default initCalculator;
