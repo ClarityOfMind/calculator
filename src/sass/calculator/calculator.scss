@@ -8,6 +8,7 @@
     margin: auto;
     margin-bottom: 30px;
     position: relative;
+    overflow: hidden;
 
     &-burger {
         position: absolute;
@@ -18,23 +19,23 @@
 
     &-menu {
         position: absolute;
-        display: none;
         top: 0;
-        width: 70%;
+        width: 60%;
         height: 100%;
         z-index: 9998;
         padding-top: 30px;
         padding-left: 10px;
-        background: #fff;
+        background: var(--calculator-bg-color);
         opacity: 0;
         border-right: 1px solid;
         transform: translateX(-235px);
-        transition: transform 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
 
         &--opened {
             display: block;
             transform: translateX(0px);
             opacity: 0.9;
+            transition: all 0.2s ease-in-out;
         }
     }
 
@@ -76,6 +77,7 @@
 
     &-subDisplay {
         padding-right: 10px;
+        padding-left: 40px;
         font-size: 18px;
         height: 20px; 
         transform-origin: right;  

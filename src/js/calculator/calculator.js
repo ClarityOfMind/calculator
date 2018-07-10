@@ -28,7 +28,7 @@ function initCalculator (id) {
     });
 
     switchTheme ();
-    switchMode();
+    switchMode(calculator);
     openMenu(calculator);
 };
 
