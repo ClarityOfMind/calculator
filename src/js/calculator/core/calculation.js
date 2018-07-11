@@ -31,9 +31,23 @@ function calculatePercentage (firstValue, secondValue) {
 
 // factorial calculation function 
 
-function calculateFactorial (value) {
-    return (value != 1) ? value * calculateFactorial(value - 1) : 1
+ const memoizeFactorial = function () {
+    let cache = {};
+    
+    return (value) => {
+        if (value in cache) {
+            console.log('Factorial got from cache!');
+            return cache[value]
+        } else {
+            let result = (value != 1) ? value * calculateFactorial(value - 1) : 1;
+            cache[value] = result;
+            console.log('Factorial calculated');
+            return result;
+        }
+    };    
 };
+
+const calculateFactorial = memoizeFactorial();
 
 function calculateNthRoot(value, exponent) {
     if (value < 0 && n % 2 === 1)
