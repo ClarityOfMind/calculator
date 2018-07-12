@@ -5,15 +5,13 @@ import {
     calculate,
     scientificCalculate,
     calculatePercentage,
-    calculateNthRoot
     } 
 from './calculation';
 
 var subDisplayBuffer = '';
 var scientificKeyBuffer = '';
-var scientificKeyBuffer = '';
 
-function createData (key, displayedValue, subDisplayedValue, state, subDisplay,) {
+function createData (key, displayedValue, subDisplayedValue, state, subDisplay) {
 
     //Variables required
 

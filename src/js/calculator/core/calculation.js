@@ -31,7 +31,7 @@ function calculatePercentage (firstValue, secondValue) {
 
 // factorial calculation function 
 
- const memoizeFactorial = function () {
+const memoizeFactorial = function () {
     let cache = {};
     
     return (value) => {
