@@ -7,12 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "clean:dist": "rimraf -- dist .awcache",
-    "sass": "node-sass \"src/sass/index.scss\" \"dist/index.css\" --include-path node_modules --output-style compressed -q",
-    "sass:watch:dev": "node-sass -w  \"src/sass/index.scss\" \"dist/index.css\"  --source-map true --include-path node_modules",
-    "sass:watch:prod": "node-sass -w  \"src/sass/index.scss\" \"dist/index.css\"--output-style compressed -q",
+    "sass:dev": "node-sass \"src/sass/index.scss\" \"dist/dev/index.css\" --include-path node_modules --source-map true",
+    "sass:prod": "node-sass \"src/sass/index.scss\" \"dist/prod/index.css\" --output-style compressed -q",
+    "sass:watch": "node-sass -w  \"src/sass/index.scss\" \"dist/index.css\"  --output-style compressed -q --source-map true --include-path node_modules",
     "build": "npm run clean:dist && cross-env NODE_ENV=development webpack -d --display-error-details",
-    "build:prod": "npm run clean:dist && npm run sass && cross-env NODE_ENV=production webpack -p",
-    "build:dev": "npm-run-all -p -r \"build -- --watch\" sass:watch:dev"
+    "build:prod": "npm run clean:dist && npm run sass:prod && cross-env NODE_ENV=production webpack -p",
+    "build:dev": "npm run clean:dist && npm run sass:dev && cross-env NODE_ENV=development webpack -d"
   },
   "repository": {
     "type": "git",

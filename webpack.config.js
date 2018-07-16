@@ -10,17 +10,19 @@ const CopyWebpackPlugin    = require('copy-webpack-plugin');
 var customConfiguration = function webpackConfig() {
     var config = {};
 
+    const output = NODE_ENV === 'development' ? 'dist/dev' : 'dist/prod';
+
     /* config.context = (__dirname, 'src'); */
     config.entry = './src/js/index.js';
 
     config.output = {
-        // path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, output),
         filename: 'index.js'
         // publicPath: 'pathOrUrlWhenProductionBuild'
     };
 
     config.watch = NODE_ENV === 'development';
-    /* config.devtool = NODE_ENV === 'development' ? 'source-map' : null; */
+    /* config.devtool = NODE_ENV === 'development' ? 'source-map' : false; */
     
     /* config.resolve = {
         extensions: ['*','js']
@@ -38,12 +40,12 @@ var customConfiguration = function webpackConfig() {
                     }
                 }
             } /* {
-            test: /\.styl$/,
+            test: /\.scss$/,
             use: [
                 MiniCssExtractPlugin.loader,
                 'css-loader',
                 'postcss-loader',
-                'stylus-loader'
+                'sass-loader'
             ]
         },{
             test: /\.(png|jpg|gif)$/,
@@ -67,7 +69,7 @@ var customConfiguration = function webpackConfig() {
             title: constants.HTML_TITLE,
             subTitle: NODE_ENV === 'development' ? 'Development mode' : 'Production mode',
             minify: {
-                collapseWhitespace: true
+                collapseWhitespace: NODE_ENV === 'production'
             },
             template: 'src/templates/index.html'
         }),
