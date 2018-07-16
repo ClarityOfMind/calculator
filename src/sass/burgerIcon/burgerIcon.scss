@@ -13,6 +13,13 @@
         border-radius: 1px;
     }
 
+    &--opened {
+        burgerIcon-topStripe,
+        burgerIcon-bottomStripe {
+            width: 0;
+        }
+    }
+
     &:hover {
         cursor: pointer
     }

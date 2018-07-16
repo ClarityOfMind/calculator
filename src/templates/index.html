@@ -11,6 +11,8 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
+
+
     <header class="header">
         <div class="container container-720">
             <div class="row">
@@ -85,8 +87,11 @@
             </div><!-- row -->
         </div>
     </header>
+
+
     <div class="container container-720">
-        <div id="calc1">
+        <h2 class="text-center"><%= htmlWebpackPlugin.options.subTitle %></h2>
+        <section id="calc1">
             <div class="calculator">
                 <div class="calculator-burger burgerIcon">
                     <div class="burgerIcon-topStripe"></div>
@@ -102,7 +107,17 @@
                                 </div> 
                             </div>
                         </li>
+                        <li>
+                            <div class="calculator-logJuornalSwitcher">
+                                <div class="calculator-logJournalSwitcherFrame">
+                                    <div class="calculator-logJournalSwitcherButton"></div>
+                                </div> 
+                            </div>
+                        </li>
                     </ul>
+                </div>
+                <div class="calculator-logJournal text-right">
+                    <div class="calculator-logClearButton text-center">X</div>
                 </div>
                 <div class="calculator-subDisplay text-right"></div>
                 <div class="calculator-display text-right">0</div>
@@ -171,7 +186,7 @@
                                     <button class="calculator-operatorKey" data-sign ="&radic;" data-action="sqrRoot">&radic;</button>
                                 </div>
                                 <div class="col-12">
-                                    <button class="calculator-operatorKey" data-sign ="n√" data-action="nthRoot">n√</button>
+                                    <button class="calculator-operatorKey" data-sign ="n√" data-action="nthRoot"><sup>n</sup>√x</button>
                                 </div>
                                 <div class="col-12">
                                     <button class="calculator-operatorKey" data-sign ="log" data-action="log">log</button>
@@ -203,135 +218,136 @@
                     </div><!-- row -->   
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="calc2"> <!-- second calc start -->
-            <div class="calculator">
-                <div class="calculator-burger burgerIcon">
-                    <div class="burgerIcon-topStripe"></div>
-                    <div class="burgerIcon-midStripe"></div>
-                    <div class="burgerIcon-bottomStripe"></div>
-                </div>
-                <div class="calculator-menu">
-                    <ul class="list-unstyled">
-                        <li>
-                            <div class="calculator-modeSwitcher">
-                                <div class="calculator-modeSwitcherFrame">
-                                    <div class="calculator-modeSwitcherButton"></div>
-                                </div> 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="calculator-subDisplay text-right"></div>
-                <div class="calculator-display text-right">0</div>
-                <div class="calculator-keys">
-                    <div class="row no-gutters">
-                        <div class="col-8">
-                            <div class="row no-gutters">
-                                <div class="col-12">
-                                    <div class="row no-gutters text-center">
-                                        <div class="col-4">
-                                            <button class="calculator-operatorKey" data-action="clear">AC</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class="calculator-operatorKey" data-action="changeSign">±</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class="calculator-operatorKey" data-action="percentage">%</button>
-                                        </div>
-                                    </div>
-                                    <!-- row -->
-                                </div>
-                                <div class="col-12">
-                                    <div class="row no-gutters text-center">
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">7</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">8</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">9</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">4</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">5</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">6</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">1</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">2</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey">3</button>
-                                        </div>
-                                        <div class="col-8">
-                                            <button class=" calculator-digitKey">0</button>
-                                        </div>
-                                        <div class="col-4">
-                                            <button class=" calculator-digitKey" data-action="decimal">.</button>
-                                        </div>
-                                    </div>
-                                    <!-- row -->
-                                </div>
-                            </div>
-                            <!-- row -->
-                            <div class="row"></div>
-                        </div>
-                        <div class="col calculator-extendedKeys">
-                            <div class="row no-gutters">
-                                <div class="col-12">
-                                    <button class="calculator-operatorKey" data-sign="sqr" data-action="exponentiation">x
-                                        <sup>2</sup>
-                                    </button>
-                                </div>
-                                <div class="col-12">
-                                    <button class="calculator-operatorKey" data-sign="&radic;" data-action="sqrRoot">&radic;</button>
-                                </div>
-                                <div class="col-12">
-                                    <button class="calculator-operatorKey" data-sign="n√" data-action="nthRoot">n√</button>
-                                </div>
-                                <div class="col-12">
-                                    <button class="calculator-operatorKey" data-sign="log" data-action="log">log</button>
-                                </div>
-                                <div class="col-12">
-                                    <button class="calculator-operatorKey" data-sign="fact" data-action="factorial">n!</button>
-                                </div>
-                            </div>
-                            <!-- row -->
-                        </div>
-                        <div class="col">
-                            <div class="row no-gutters">
-                                <div class="col-12 text center">
-                                    <button class="calculator-operatorKey" data-action="add">+</button>
-                                </div>
-                                <div class="col-12 text center">
-                                    <button class="calculator-operatorKey" data-action="subtract">-</button>
-                                </div>
-                                <div class="col-12 text center">
-                                    <button class="calculator-operatorKey" data-action="multiply">&times;</button>
-                                </div>
-                                <div class="col-12 text center">
-                                    <button class="calculator-operatorKey" data-action="divide">÷</button>
-                                </div>
-                                <div class="col-12 text center">
-                                    <button class="calculator-equalKey" data-action="calculate">=</button>
-                                </div>
-                            </div>
-                            <!-- row -->
-                        </div>
+        <section id="calc2">
+                <div class="calculator">
+                    <div class="calculator-burger burgerIcon">
+                        <div class="burgerIcon-topStripe"></div>
+                        <div class="burgerIcon-midStripe"></div>
+                        <div class="burgerIcon-bottomStripe"></div>
                     </div>
-                    <!-- row -->
+                    <div class="calculator-menu">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="calculator-modeSwitcher">
+                                    <div class="calculator-modeSwitcherFrame">
+                                        <div class="calculator-modeSwitcherButton"></div>
+                                    </div> 
+                                </div>
+                            </li>
+                            <li>
+                                <div class="calculator-logJuornalSwitcher">
+                                    <div class="calculator-logJournalSwitcherFrame">
+                                        <div class="calculator-logJournalSwitcherButton"></div>
+                                    </div> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="calculator-logJournal text-right">
+                        <div class="calculator-logClearButton text-center">X</div>
+                    </div>
+                    <div class="calculator-subDisplay text-right"></div>
+                    <div class="calculator-display text-right">0</div>
+                    <div class="calculator-keys">
+                        <div class="row no-gutters">
+                            <div class="col-8">
+                                <div class="row no-gutters">
+                                        <div class="col-12">
+                                            <div class="row no-gutters text-center">
+                                                <div class="col-4">
+                                                    <button class="calculator-operatorKey" data-action="clear">AC</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class="calculator-operatorKey" data-action="changeSign">±</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class="calculator-operatorKey" data-action="percentage">%</button>
+                                                </div>
+                                            </div><!-- row -->
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row no-gutters text-center">
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">7</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">8</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">9</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">4</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">5</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">6</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">1</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">2</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey">3</button>
+                                                </div>
+                                                <div class="col-8">
+                                                    <button class=" calculator-digitKey">0</button>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class=" calculator-digitKey" data-action="decimal">.</button>
+                                                </div>    
+                                            </div><!-- row -->
+                                        </div>
+                                </div><!-- row -->
+                            </div>
+                            <div class="col calculator-extendedKeys">
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+                                        <button class="calculator-operatorKey" data-sign ="sqr" data-action="exponentiation">x <sup>2</sup></button>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="calculator-operatorKey" data-sign ="&radic;" data-action="sqrRoot">&radic;</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="calculator-operatorKey" data-sign ="n√" data-action="nthRoot"><sup>n</sup>√x</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="calculator-operatorKey" data-sign ="log" data-action="log">log</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="calculator-operatorKey" data-sign ="fact" data-action="factorial">n!</button>
+                                    </div>
+                                </div><!-- row -->
+                            </div>
+                            <div class="col">
+                                <div class="row no-gutters">
+                                    <div class="col-12 text center">
+                                        <button class="calculator-operatorKey" data-action="add">+</button>
+                                    </div>
+                                    <div class="col-12 text center">
+                                        <button class="calculator-operatorKey" data-action="subtract">-</button>
+                                    </div>
+                                    <div class="col-12 text center">
+                                        <button class="calculator-operatorKey" data-action="multiply">&times;</button>
+                                    </div>
+                                    <div class="col-12 text center">
+                                        <button class="calculator-operatorKey" data-action="divide">÷</button>
+                                    </div>
+                                    <div class="col-12 text center">
+                                        <button class="calculator-equalKey" data-action="calculate">=</button>
+                                    </div>
+                                </div><!-- row -->
+                            </div>
+                        </div><!-- row -->   
+                    </div>
                 </div>
-            </div>
-        </div> <!-- second calc end -->
+            </section>
 
     </div><!-- container -->
     <footer class="footer">

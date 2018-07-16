@@ -2,5 +2,5 @@
 
 import initCalculator    from './calculator/calculator';
 
-initCalculator('#calc1');
-initCalculator('#calc2');
+const firstCalcilator  = initCalculator('#calc1');
+const secondcalculator = initCalculator('#calc2');

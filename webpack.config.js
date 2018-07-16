@@ -1,6 +1,6 @@
 'use strict';
 
-// const NODE_ENV           = process.env.NODE_ENV || 'development';
+const NODE_ENV             = process.env.NODE_ENV || 'development';
 const path                 = require('path');
 const constants            = require("./constants");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,6 +10,7 @@ const CopyWebpackPlugin    = require('copy-webpack-plugin');
 var customConfiguration = function webpackConfig() {
     var config = {};
 
+    /* config.context = (__dirname, 'src'); */
     config.entry = './src/js/index.js';
 
     config.output = {
@@ -18,7 +19,8 @@ var customConfiguration = function webpackConfig() {
         // publicPath: 'pathOrUrlWhenProductionBuild'
     };
 
-    config.devtool = 'source-map';
+    config.watch = NODE_ENV === 'development';
+    /* config.devtool = NODE_ENV === 'development' ? 'source-map' : null; */
     
     /* config.resolve = {
         extensions: ['*','js']
@@ -63,6 +65,7 @@ var customConfiguration = function webpackConfig() {
 
         new HtmlWebpackPlugin({
             title: constants.HTML_TITLE,
+            subTitle: NODE_ENV === 'development' ? 'Development mode' : 'Production mode',
             minify: {
                 collapseWhitespace: true
             },

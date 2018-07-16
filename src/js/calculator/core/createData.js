@@ -1,6 +1,7 @@
 'use strict';
 
 import getKeyType from "../helpers/getKeyType";
+import saveLog    from "../helpers/saveLog";
 import {    
     calculate,
     scientificCalculate,
@@ -11,7 +12,7 @@ from './calculation';
 var subDisplayBuffer = '';
 var scientificKeyBuffer = '';
 
-function createData (key, displayedValue, subDisplayedValue, state, subDisplay) {
+function createData (calculator, key, displayedValue, subDisplayedValue, state, subDisplay) {
 
     //Variables required
 
@@ -44,11 +45,11 @@ function createData (key, displayedValue, subDisplayedValue, state, subDisplay) 
     //This block of code is executed when clicked decimal button
 
     if (keyType === 'decimal') {  
-        if (!displayedValue.includes(',')) {
-            return {mainDisplay: displayedValue + ','};
+        if (!displayedValue.includes('.')) {
+            return {mainDisplay: displayedValue + '.'};
         } 
         if (previousKeyType === 'operator' || previousKeyType === 'calculate') {
-            return {mainDisplay: '0,'};
+            return {mainDisplay: '0.'};
         }
 
         return {mainDisplay: displayedValue};
@@ -85,18 +86,20 @@ function createData (key, displayedValue, subDisplayedValue, state, subDisplay) 
     //This block of code is executed when clicked equal button
 
     if (keyType === 'calculate') {
-
         if (firstValue) {
             let result1 = +calculate(displayedValue, operator, secondValue).toFixed(10);
             let result2 = +calculate(firstValue, operator, displayedValue).toFixed(10);
 
-            return previousKeyType === 'calculate'
-            ? {mainDisplay: result1, secondDisplay: ' '} 
-            : {mainDisplay: result2, secondDisplay: ' '}
+            if (previousKeyType === 'calculate') {
+                return {mainDisplay: result1, secondDisplay: ' '} 
+            } else {
+                saveLog(calculator, subDisplay, displayedValue, previousKeyType);
+                return {mainDisplay: result2, secondDisplay: ' '}
+            }
         };
     };                                
 
-    //This block of code is executed when clicked percentage button --------------------------- issue !!!
+    //This block of code is executed when clicked percentage button
 
     if (keyType === 'percentage') {
         let percent = calculatePercentage(firstValue, displayedValue);  

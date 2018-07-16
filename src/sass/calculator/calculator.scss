@@ -10,6 +10,32 @@
     position: relative;
     overflow: hidden;
 
+    &-logJournal {
+        position: relative;
+        font-size: 10px;
+        height: 0;
+        overflow: auto;
+        padding-right: 10px;
+        padding-left: 40px;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+        transition: all 0.2s; 
+    }
+
+    &-logClearButton {
+        position: absolute;
+        left: 50px;
+        height: 15px;
+        width: 15px;
+        border: 1px solid;
+        border-radius: 5px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     &-burger {
         position: absolute;
         top: 10px;
@@ -39,7 +65,7 @@
         }
     }
 
-     &-modeSwitcherFrame {
+    &-modeSwitcherFrame {
         margin-top: 20px;
         padding: 1px 2px;
         width: 37px;
@@ -61,6 +87,34 @@
     }
 
     &-modeSwitcherButton {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        background-color: #fff;
+    }
+
+    &-logJournalSwitcherFrame {
+        margin-top: 20px;
+        padding: 1px 2px;
+        width: 37px;
+        border-radius: 12px;
+        box-shadow: inset 0px 1px 3px 0px #000;
+        background: var(--themeSwitcher-bg-color);
+        position: relative;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:after {
+            content: 'journal';
+            position: absolute;
+            top: -5px;
+            right: -70px;
+        }
+    }
+
+    &-logJournalSwitcherButton {
         height: 15px;
         width: 15px;
         border-radius: 50%;

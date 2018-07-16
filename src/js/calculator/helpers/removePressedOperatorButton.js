@@ -1,7 +1,7 @@
 'use strict';
 
-function removePressedOperatorButton () {
-    Array.from(document.getElementsByClassName('calculator-operatorKey'))
+function removePressedOperatorButton (calculator) {
+    Array.from(calculator.getElementsByClassName('calculator-operatorKey'))
     .forEach(element => element.classList.remove('calculator-operatorKey--isPressed'));
 }
 

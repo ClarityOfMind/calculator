@@ -19,6 +19,12 @@ function updateState (key, calculatedValue, displayedValue, state, subDisplay) {
 
     state.previousKeyType = keyType;
 
+    if (keyType === 'number') {
+        if (previousKeyType === 'calculate') {
+            clearState(state, subDisplay);
+        }
+    }
+
     //This block of code is executed when clicked simple operator button
 
     if (keyType === 'operator') {

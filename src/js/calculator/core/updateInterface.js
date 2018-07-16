@@ -6,7 +6,7 @@ import removePressedOperatorButton from '../helpers/removePressedOperatorButton'
 function updateInterface (key, state, display, subDisplay, calculator) {
     const keyType = getKeyType(key);
 
-    removePressedOperatorButton (state, subDisplay);
+    removePressedOperatorButton (calculator);
 
     if (keyType === 'operator') key.classList.add('calculator-operatorKey--isPressed');
     if (keyType === 'clear' && key.textContent !== 'AC') key.textContent = 'AC';
