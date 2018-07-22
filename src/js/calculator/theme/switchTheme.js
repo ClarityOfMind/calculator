@@ -9,14 +9,14 @@ themeSwitcher.addEventListener ('click', () => {
         if (theme === 'day') {
             var themeAnimation = themeButton.animate([
                 {transform: 'translateX(0)'},
-                {transform: 'translateX(18px)'}
+                {transform: 'translateX(20px)'}
             ],100);
 
             themeAnimation.addEventListener('finish', () => {
-                themeButton.style.transform = 'translateX(18px)';
+                themeButton.style.transform = 'translateX(20px)';
             });
 
-            document.body.style.setProperty('--calculator-bg-color', '#000000');
+            document.body.style.setProperty('--calculator-bg-color', '#050a14');
             document.body.style.setProperty('--main-text-color', '#ffffff');
             document.body.style.setProperty('background-color', '#737373');
             document.body.style.setProperty('--operatorButton-bg-color', '#e6e6e6');

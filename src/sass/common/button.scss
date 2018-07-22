@@ -1,0 +1,22 @@
+.button {
+    width: 56px;
+    height: 56px;
+    margin: 0;
+    padding: 0;
+    border:  none;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+
+    &--lastInRow {
+        border-right: 1px solid;
+        flex-basis: 112px;
+    }
+
+    &--large {
+        flex-grow: 1;
+    }
+    
+    &:focus {
+        outline: none;
+    }
+}

@@ -1,49 +1,43 @@
 'use strict';
 
 import createData        from './core/createData';
-import updateState       from './core/updateState';
-import updateDisplay     from './core/updateDisplay';
-import updateInterface   from './core/updateInterface';
+import Display           from './display/display';  
+import Menu              from './menu/menu';  
+import LogJournal        from './log-journal/log-journal';  
 import switchTheme       from '../calculator/theme/switchTheme';
-import switchMode        from '../calculator/theme/switchMode';
-import openMenu          from './helpers/openMenu';
-import clearLogJournal   from './helpers/clearLogJournal';
-import openLogJournal    from '../calculator/theme/openLogJournal';
 
-function initCalculator (id) {
+class Calculator  {
+    constructor(id) {
+        this.id             = document.querySelector(`${id} .calculator`);
+        this.keys           = this.id.querySelector('.calculator-keys');
+        this.burger         = this.id.querySelector('.calculator-burger');
+        this.modeSwitcher   = this.id.querySelector('.calculator-modeSwitcherFrame');
+        this.logOpenButton  = this.id.querySelector('.calculator-logOpenButton');
+        this.logClearButton = this.id.querySelector('.calculator-logClearButton');
+        this.display        = new Display (this.id);
+        this.menu           = new Menu (this.id);
+        this.logJournal     = new LogJournal (this.id)
+    };
 
-    //Define variables required
+    init() {    
+        this.keys.addEventListener('click', e => {
+        //Set listener when any calculator key is pushed    
+            if (e.target.matches('button')) {
+                const key         = e.target;
+                const displayData = createData(this.id, key)
 
-    const calculator = document.querySelector(`${id} .calculator`);
-    const keys       = calculator.querySelector('.calculator-keys');
-    const display    = calculator.querySelector('.calculator-display');
-    const subDisplay = calculator.querySelector('.calculator-subDisplay');
+                this.display.updateDisplay (displayData);
+                this.display.watchFontSize();
+            };
+        });
 
-    keys.addEventListener('click', e => {
-    //Set listener when any calculator key is pushed    
-        if (e.target.matches('button')) {
-            const key               = e.target;
-            const displayedValue    = display.textContent;
-            const subDisplayedValue = subDisplay.textContent;
-            const displayData       = createData(calculator, key, displayedValue, subDisplayedValue, calculator.dataset, subDisplay);
-
-            updateDisplay (displayData, display, subDisplay);
-            updateState (key, displayData.mainDisplay, displayedValue, calculator.dataset, subDisplay);
-            updateInterface(key, calculator.dataset, display, subDisplay, calculator);
-        }
-    });
-
-
-    switchTheme ();
-
-    openLogJournal(calculator);
-
-    switchMode(calculator);
-
-    openMenu(calculator);
-
-    clearLogJournal(calculator)
+        this.burger.addEventListener('click', this.menu.openMenu.bind(this.menu));
+        this.modeSwitcher.addEventListener('click', this.menu.switchMode.bind(this.menu));
+        this.logOpenButton.addEventListener('click', this.logJournal.openLogJournal.bind(this.logJournal));
+        this.logClearButton.addEventListener('click', this.logJournal.clearLogJournal.bind(this.logJournal));
+        switchTheme ();
+    };
 };
 
-export default initCalculator;
+export default Calculator;
 

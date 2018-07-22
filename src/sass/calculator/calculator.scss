@@ -1,39 +1,94 @@
 .calculator {
-    max-width: 320px;
+    width: 280px;
     background:  var(--calculator-bg-color);
     box-shadow: 0px 0 24px -4px var(--main-text-color);
-    transition: all 0.2s ease;
     color: var(--main-text-color);
-    padding-top: 10px;
     margin: auto;
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
+    transition: all 0.2s ease;
 
-    &-logJournal {
-        position: relative;
-        font-size: 10px;
-        height: 0;
-        overflow: auto;
-        padding-right: 10px;
-        padding-left: 40px;
-        display: flex;
-        flex-direction: column;
-        align-content: flex-start;
-        transition: all 0.2s; 
-    }
-
-    &-logClearButton {
+    &-logOpenButton {
         position: absolute;
-        left: 50px;
-        height: 15px;
-        width: 15px;
-        border: 1px solid;
-        border-radius: 5px;
+        top: 40px;
+        left: 10px;
+        font-size: 21px;
+        font-weight: 700;
+        z-index: 9997;  
+        color: var(--main-text-color);
 
         &:hover {
             cursor: pointer;
         }
+    }
+
+    &-logJournal {
+        position: absolute;
+        z-index: 9996;
+        height: 100%;
+        width: 100%;
+        padding: 10px 10px 50px 50px;
+        font-size: 22px;
+        background: var(--calculator-bg-color);
+        opacity: 0;
+        transform: translateY(-357px); 
+        transition: all 0.2s ease-in-out;
+
+        &--opened {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    &-logJournalContent {
+        position: relative;
+        overflow-y: auto;
+        height: 100%;
+       
+        
+    }
+
+    &-logJournalList {
+        list-style: none;
+        padding-left: 0;
+        padding-right: 10px;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+        
+    }
+
+    &-logClearButton {
+        position: absolute;
+        bottom: 5px;
+        left: 10px;
+        height: 30px;
+        width: 30px;
+        padding: 0;
+        border: none;
+        background: none;
+
+        &:focus {
+            outline: none;
+        }
+        
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-log {
+        font-style: italic;
+        border-bottom: 1px solid; 
+        margin-bottom: 5px;
+    }
+
+    &-iconPath {
+        fill: var(--logo-color);
+        transition: all 0.2s ease;
     }
 
     &-burger {
@@ -65,6 +120,11 @@
         }
     }
 
+    &-menuList {
+        list-style: none;
+        padding: 0;
+    }
+
     &-modeSwitcherFrame {
         margin-top: 20px;
         padding: 1px 2px;
@@ -92,37 +152,17 @@
         border-radius: 50%;
         background-color: #fff;
     }
-
-    &-logJournalSwitcherFrame {
-        margin-top: 20px;
-        padding: 1px 2px;
-        width: 37px;
-        border-radius: 12px;
-        box-shadow: inset 0px 1px 3px 0px #000;
-        background: var(--themeSwitcher-bg-color);
-        position: relative;
-
-        &:hover {
-            cursor: pointer;
-        }
-
-        &:after {
-            content: 'journal';
-            position: absolute;
-            top: -5px;
-            right: -70px;
-        }
-    }
-
-    &-logJournalSwitcherButton {
-        height: 15px;
-        width: 15px;
-        border-radius: 50%;
-        background-color: #fff;
+    
+    &-screen {
+        padding-top: 10px;
+        padding-left: 40px;
+        border: 1px solid;
     }
 
     &-display {
-        padding-right: 10px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
         font-size: 30px;
         height: 45px;
         padding-right: 10px;
@@ -130,18 +170,35 @@
     }
 
     &-subDisplay {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
         padding-right: 10px;
-        padding-left: 40px;
         font-size: 18px;
         height: 20px; 
         transform-origin: right;  
     }
 
-    &-operatorKey {
+    &-keys {
         width: 100%;
+        display: flex;  
+    }
+
+    &-mainKeys {
+        flex-basis: 168px;
+    }
+
+    &-supportOperators {
+        display: flex;
+    }
+
+    &-digits {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &-operatorKey {
         background: var(--operatorButton-bg-color);
-        border: none;
-        padding: 15px 10px;
         font-size: 25px;
         color: #000;
         transition: all 0.2s ease;
@@ -157,8 +214,6 @@
     }
 
     &-digitKey {
-        border: none;
-        padding: 15px 10px;
         background: var(--calculator-bg-color);
         font-size: 25px;
         color: var(--main-text-color);
@@ -173,29 +228,28 @@
          display: none;
     }
 
-    &-equalKey {
-        width: 100%;
-        height: 100%;
-        border: none;
-        color: #000;
-        background: var(--equalButton-bg-color);
-        font-size: 30px;
-        transition: all 0.2s ease;
-        padding: 11px 0;
-        &:hover {
-            cursor: pointer;
-        }
+    &-standardOperators {
+        display: flex;
+        flex-wrap: wrap;
+        
     }
 
-    button {
-        width: 100%;
-        &:focus {
-           outline: none;
+    &-equalKey {
+        background: var(--equalButton-bg-color);
+    }
+}
+@media screen and (max-width: 576px) {
+    calculator {
+        &-operatorKey,
+        &-digitKey,
+        &-equalKey {
+            font-size: 20px;
         }
+
     }
 }
 
-@include media-breakpoint-down(sm) {
+/* @include media-breakpoint-down(sm) {
     .calculator {
         &-operatorKey,
         &-digitKey,
@@ -204,4 +258,5 @@
         }
 
     }
-};
+}; */
+

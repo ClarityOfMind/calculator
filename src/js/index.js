@@ -1,6 +1,9 @@
 'use strict';
 
-import initCalculator    from './calculator/calculator';
+import Calculator from './calculator/calculator';
 
-const firstCalcilator  = initCalculator('#calc1');
-const secondcalculator = initCalculator('#calc2');
+const firstCalcilator  = new Calculator('#calc1');
+const secondcalculator = new Calculator('#calc2');
+
+firstCalcilator.init();
+secondcalculator.init();

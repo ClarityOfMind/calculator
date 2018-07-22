@@ -1,10 +1,10 @@
 'use strict';
 
-function clearLogJournal (calculator) {
-    let clearButton =  calculator.querySelector('.calculator-logClearButton');
+function clearLogJournal (id) {
+    let clearButton =  id.querySelector('.calculator-logClearButton');
 
     clearButton.addEventListener('click', () => {
-        Array.from(calculator.getElementsByClassName('.calculator-log'))
+        Array.from(id.getElementsByClassName('.calculator-log'))
         .forEach(element => element.parentNode.removeChild(element));
     });
 };

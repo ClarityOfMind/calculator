@@ -57,7 +57,37 @@ src/js/calculator/calculator.js   // line 12
 ```sh
 src/js/calculator/calculator.js   // line 11
 ```
+## ES6 features used
 
+1.  Class
+
+```sh
+To reach module approach and make apllication's expansion fast and easy.
+```
+
+2.  Const
+
+```sh
+To ensure immutability of data assigned to variables.
+```
+
+3.  Let
+
+```sh
+To limit variables' scope.
+```
+
+4.  Arrow function
+
+```sh
+Use as a callback function to make parent's function context available.
+```
+
+5.  Destructuring assignment
+
+```sh
+syntactic sugar for quick writing and neat code style,
+```
 ## Contributing
 
 1.  Fork it (<https://github.com/yourname/yourproject/fork>)

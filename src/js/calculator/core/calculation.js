@@ -6,11 +6,23 @@ function calculate (operand1, operator, operand2) {
     let Value1 = parseFloat(operand1);
     let Value2 = parseFloat(operand2);
 
-    if (operator === 'add')      {return Value1 + Value2};
-    if (operator === 'subtract') {return Value1 - Value2};
-    if (operator === 'multiply') {return Value1 * Value2};
-    if (operator === 'divide')   {return Value1 / Value2};
-    if (operator === 'nthRoot')  {return calculateNthRoot(Value1, Value2)};
+    switch (operator) {
+        case 'add':
+            return Value1 + Value2;
+            break;
+        case 'subtract':
+            return Value1 - Value2;
+            break;
+        case 'multiply':
+            return Value1 * Value2;
+            break;
+        case 'divide':
+            return Value1 / Value2;
+            break;
+        case 'nthRoot':
+            return calculateNthRoot(Value1, Value2);
+            break;                    
+    }
 };
 
 //Makes calculations with scientific operators
@@ -18,10 +30,20 @@ function calculate (operand1, operator, operand2) {
 function scientificCalculate (operator, value) {
     let Value = parseFloat(value);
 
-    if (operator === 'exponentiation') {return Math.pow(Value,2)};
-    if (operator === 'sqrRoot')        {return Math.sqrt(Value)};
-    if (operator === 'log')            {return Math.log(Value)};
-    if (operator === 'factorial')      {return calculateFactorial (Value)};
+    switch (operator) {
+        case 'exponentiation':
+            return Math.pow(Value,2);
+            break;
+        case 'sqrRoot':
+            return Math.sqrt(Value);
+            break;
+        case 'log':
+            return Math.log(Value);
+            break;
+        case 'factorial':
+            return calculateFactorial (Value);
+            break;                 
+    }
 };
 
 // Calculates percentage function 

@@ -10,7 +10,8 @@ const CopyWebpackPlugin    = require('copy-webpack-plugin');
 var customConfiguration = function webpackConfig() {
     var config = {};
 
-    const output = NODE_ENV === 'development' ? 'dist/dev' : 'dist/prod';
+    const isProd = NODE_ENV === 'production';
+    const output = isProd ? 'dist/prod' : 'dist/dev';
 
     /* config.context = (__dirname, 'src'); */
     config.entry = './src/js/index.js';
@@ -21,8 +22,8 @@ var customConfiguration = function webpackConfig() {
         // publicPath: 'pathOrUrlWhenProductionBuild'
     };
 
-    config.watch = NODE_ENV === 'development';
-    /* config.devtool = NODE_ENV === 'development' ? 'source-map' : false; */
+    config.watch = !isProd;
+    config.devtool = isProd ? false : 'source-map';
     
     /* config.resolve = {
         extensions: ['*','js']
@@ -67,9 +68,9 @@ var customConfiguration = function webpackConfig() {
 
         new HtmlWebpackPlugin({
             title: constants.HTML_TITLE,
-            subTitle: NODE_ENV === 'development' ? 'Development mode' : 'Production mode',
+            subTitle: isProd ? 'Production mode' : 'Development mode',
             minify: {
-                collapseWhitespace: NODE_ENV === 'production'
+                collapseWhitespace: isProd
             },
             template: 'src/templates/index.html'
         }),

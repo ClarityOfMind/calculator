@@ -1,148 +1,244 @@
 'use strict';
-
-import getKeyType from "../helpers/getKeyType";
-import saveLog    from "../helpers/saveLog";
-import {    
-    calculate,
+import LogJournal                  from '../log-journal/log-journal'; 
+import getKeyType                  from '../helpers/getKeyType';
+import removePressedOperatorButton from '../helpers/removePressedOperatorButton';
+import { calculate,
     scientificCalculate,
     calculatePercentage,
-    } 
-from './calculation';
+} from './calculation';
 
-var subDisplayBuffer = '';
-var scientificKeyBuffer = '';
+let calcBuffer;
+let subDisplayBuffer;
+let subDisplayBuffer2;
+let percentageBuffer;
+let scientificKeyBuffer = '';
+let isCalculated= false;
 
-function createData (calculator, key, displayedValue, subDisplayedValue, state, subDisplay) {
+function createData(id, key) {
 
-    //Variables required
-
-    const keyValue = key.textContent;
-    const keyType  = getKeyType(key);
-    const sign     = key.dataset.sign; 
+    const display           = id.querySelector('.calculator-display');
+    const subDisplay        = id.querySelector('.calculator-subDisplay');
+    const clearButton       = id.querySelector('[data-action=clear]');
+    const displayedValue    = display.textContent;
+    const subDisplayedValue = subDisplay.textContent;
+    const keyValue          = key.textContent;
+    const keyType           = getKeyType(key);
+    const sign              = key.dataset.sign; 
+    const state             = id.dataset;
     const {
         firstValue,
         secondValue,
         operator,
         previousKeyType,
     } = state;
-    
-    //This block of code is executed when clicked button with a digit
 
-    if (keyType === 'number') {
-        if (displayedValue === '0' || 
-            previousKeyType === 'operator' ||
-            previousKeyType === 'calculate'||
-            previousKeyType === 'nthRoot'
-        ) {
-            return  {mainDisplay: keyValue} 
-        } else if (previousKeyType === 'percentage') {
-            return {mainDisplay: keyValue, secondDisplay: subDisplayBuffer}
-        } else {
-            return {mainDisplay: displayedValue + keyValue}
-        }
+    let result = '';
+    let isReadyForCalculation = firstValue && operator && previousKeyType !== 'operator' && previousKeyType !== 'calculate';
+    
+
+    switch (keyType) {
+        case 'number':
+            result = performForNumber();
+            break;
+        case 'operator':
+            result = performForOperator();
+            break;
+        case 'scientificOperator':
+            result = performForScientificOperator();
+            break;
+        case 'decimal':
+            result = performForDecimal();
+            break;
+        case 'percentage':
+            result = performForPercentage();
+            break;     
+        case 'changeSign':
+            result = changeSign();
+            break;
+        case 'calculate':
+            result = makeCalculation();
+            break;
+        case 'clear':
+            result = {mainDisplay: '0'};                       
     };
 
-    //This block of code is executed when clicked decimal button
+    updateState ()
 
-    if (keyType === 'decimal') {  
+    function updateState () {
+        state.previousKeyType = keyType;
+        removePressedOperatorButton (id);
+        if (keyType !== 'clear') clearButton.textContent = 'CE';
+
+        switch (keyType) {
+            case 'number':
+                switch (previousKeyType) {
+                    case 'operator':
+                        state.secondValue = keyValue;
+                        break;
+                    case 'calculate':
+                        state.firstValue = ''
+                };
+                if (previousKeyType === 'operator') {
+                    state.secondValue = keyValue;
+                };
+                break;
+            case 'operator':
+                isCalculated= false;
+                key.classList.add('calculator-operatorKey--isPressed')
+                state.operator = key.dataset.action;
+                state.firstValue = isReadyForCalculation
+                ? result.mainDisplay
+                : displayedValue;
+                break;
+            case 'calculate':    
+                isCalculated = previousKeyType !== 'calculate'? true : false;
+                switch (previousKeyType) {
+                    case 'scientificOperator':
+                    case 'percentage':
+                        state.secondValue = displayedValue;  
+                };
+                break;
+            case 'clear':
+                if (clearButton.textContent === 'CE') {
+                    clearButton.textContent = 'AC'
+                } else {
+                    clearState();  
+                };
+                              
+        };
+    }
+
+    function performForNumber () {
+        if (displayedValue === '0') return {mainDisplay: keyValue};
+
+        switch (previousKeyType) {
+            case 'operator':
+            case 'calculate':
+            case 'nthRoot':
+                return {mainDisplay: keyValue} 
+                break;
+            case 'percentage':
+                return {mainDisplay: keyValue, secondDisplay: subDisplayBuffer}
+                break;
+            default:
+                return {mainDisplay: displayedValue + keyValue}        
+        };
+    };
+
+    function performForOperator () {
+        
+        if (isReadyForCalculation) {
+            calcBuffer = calculate(firstValue, operator, displayedValue)
+        };
+
+        if (subDisplay.textContent === '0' ) {
+            return {mainDisplay: calcBuffer, secondDisplay: subDisplayedValue + ' ' + keyValue };
+        }
+
+        switch (previousKeyType) {
+            case 'operator':
+               
+                return {secondDisplay: subDisplayBuffer + ' ' + keyValue}
+                break;
+            case 'calculate':
+                subDisplayBuffer = displayedValue;
+                
+                return {secondDisplay: subDisplayedValue + ' ' + parseFloat(displayedValue) + ' ' + keyValue }   
+            case 'percentage':
+            case 'scientificOperator':
+                subDisplayBuffer = subDisplayedValue;
+                return {mainDisplay: calcBuffer, secondDisplay: subDisplayBuffer + ' ' + keyValue};
+                break;  
+            default:
+                subDisplayBuffer = (subDisplayedValue + ' ' + displayedValue) || displayedValue;    
+                return {mainDisplay: calcBuffer, secondDisplay: subDisplayedValue + ' ' + parseFloat(displayedValue) + ' ' + keyValue }
+        }
+
+    };
+
+    function performForScientificOperator () {
+        state.scientificOperator = key.dataset.action;
+
+        if (previousKeyType !== 'scientificOperator') {
+            state.prosessedValue = displayedValue;
+            subDisplayBuffer2 = subDisplayedValue;
+            scientificKeyBuffer = ' '+ sign + '(' + state.prosessedValue + ')';
+            return {mainDisplay: scientificCalculate(state.scientificOperator, displayedValue), secondDisplay: subDisplayBuffer2 + scientificKeyBuffer};     
+        } else {
+            scientificKeyBuffer = ' ' + sign + '(' + scientificKeyBuffer + ')';
+        }    
+        return {mainDisplay: scientificCalculate(state.scientificOperator, displayedValue), secondDisplay: subDisplayBuffer2 + scientificKeyBuffer};
+    };
+
+    function performForDecimal() {
         if (!displayedValue.includes('.')) {
             return {mainDisplay: displayedValue + '.'};
-        } 
-        if (previousKeyType === 'operator' || previousKeyType === 'calculate') {
-            return {mainDisplay: '0.'};
-        }
+        };
 
-        return {mainDisplay: displayedValue};
-    };
-
-    //This block of code is executed when clicked simple operator button
-
-    if (keyType === 'operator') {
-    
-        if (firstValue && 
-            operator &&
-            previousKeyType !== 'operator' && 
-            previousKeyType !== 'calculate'
-
-        ) {
-            var result = +calculate(firstValue, operator, displayedValue).toFixed(10);
-        }
-        
-        if (
-            subDisplay.textContent === '0' || 
-            previousKeyType === 'scientificOperator' ||
-            previousKeyType === 'percentage'
-        ) {
-            return {mainDisplay: result, secondDisplay: subDisplayedValue + ' ' + keyValue };
-        } else {
-            return {mainDisplay: result, secondDisplay: subDisplayedValue + ' ' + parseFloat(displayedValue) + ' ' + keyValue }
+        switch (previousKeyType) {
+            case 'operator':
+            case 'calculate':
+                return {mainDisplay: '0.'};
+                break;
+            default: 
+                return {mainDisplay: displayedValue};
         };
     };
 
-    //This block of code is executed when clicked clearance button
-
-    if (keyType === 'clear') return {mainDisplay: '0'};
-
-    //This block of code is executed when clicked equal button
-
-    if (keyType === 'calculate') {
-        if (firstValue) {
-            let result1 = +calculate(displayedValue, operator, secondValue).toFixed(10);
-            let result2 = +calculate(firstValue, operator, displayedValue).toFixed(10);
-
-            if (previousKeyType === 'calculate') {
-                return {mainDisplay: result1, secondDisplay: ' '} 
-            } else {
-                saveLog(calculator, subDisplay, displayedValue, previousKeyType);
-                return {mainDisplay: result2, secondDisplay: ' '}
-            }
-        };
-    };                                
-
-    //This block of code is executed when clicked percentage button
-
-    if (keyType === 'percentage') {
+    function performForPercentage() {
         let percent = calculatePercentage(firstValue, displayedValue);  
         let selfPercent = calculatePercentage(displayedValue, displayedValue);
 
         if(!percent) return {mainDisplay: '0', secondDisplay: '0'};
-        if(previousKeyType === 'operator' || 
-            previousKeyType === 'number' ||
-            previousKeyType === 'decimal'
-        ) {
-            subDisplayBuffer = subDisplayedValue;
-            return {mainDisplay: percent, secondDisplay: subDisplayBuffer + ' ' + percent};
-        } else if (previousKeyType === 'percentage') {
-            return {mainDisplay: percent, secondDisplay: subDisplayBuffer + ' ' + percent};
-        } else if (previousKeyType === 'calculate') {
-            return {mainDisplay: selfPercent, secondDisplay: selfPercent}; 
-        }
-    }
-
-    //This block of code is executed when clicked scientific operator button
-    
-    if (keyType === 'scientificOperator') {
-        state.scientificOperator = key.dataset.action;
-                    
-        if (previousKeyType !== 'scientificOperator') {
-            state.prosessedValue = displayedValue;
-            subDisplayBuffer = subDisplayedValue;
-            scientificKeyBuffer = ' '+ sign + '(' + state.prosessedValue + ')';
-            return {mainDisplay: scientificCalculate(state.scientificOperator, displayedValue), secondDisplay: subDisplayBuffer + scientificKeyBuffer};     
-        } else {
-            scientificKeyBuffer = ' ' + sign + '(' + scientificKeyBuffer + ')';
-        }    
-        return {mainDisplay: scientificCalculate(state.scientificOperator, displayedValue), secondDisplay: subDisplayBuffer + scientificKeyBuffer};
+        
+        switch (previousKeyType) {
+            case 'operator':
+            case 'number':
+            case 'decimal':
+                percentageBuffer = subDisplayedValue;
+                return {mainDisplay: percent, secondDisplay: percentageBuffer + ' ' + percent};
+                break;
+            case 'percentage':
+                return {mainDisplay: percent, secondDisplay: subDisplayBuffer + ' ' + percent};
+                break;
+            case 'calculate':
+                return {mainDisplay: selfPercent, secondDisplay: selfPercent};   
+        };
     };
 
-    //This block of code is executed when clicked sign changing button
-
-    if (keyType === 'changeSign') {
+    function changeSign () {
         let value = parseFloat(displayedValue);
         if (value < 0) {
             return {mainDisplay: Math.abs(value)}
         } else return {mainDisplay: value * -1}
     };
+
+    function makeCalculation () {
+            let firstTimeCalculation = calculate(firstValue, operator, displayedValue);
+            let anotherCalculation = calculate(displayedValue, operator, secondValue);
+
+            switch (previousKeyType) {
+                case 'calculate':
+                    return {mainDisplay: anotherCalculation, secondDisplay: ' '};
+                    break;  
+                default:
+                LogJournal.saveLog(id, subDisplay, displayedValue, previousKeyType);
+                    return isCalculated ? {mainDisplay: anotherCalculation, secondDisplay: ' '} : {mainDisplay: firstTimeCalculation, secondDisplay: ' '}    
+            };
+        
+    };
+
+    function clearState () {
+            state.firstValue = '';
+            state.operator = '';
+            state.secondValue = '';
+            state.previousKeyType = '';
+            subDisplay.textContent = '';
+    };
+
+    return result;
 };
+
+
 
 export default createData;

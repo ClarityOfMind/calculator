@@ -4,6 +4,9 @@
     transition: all 0.2s ease;
     margin-bottom: 30px;
 
+    &-mainContent {
+        display: flex;
+    }
 
     &-svg {
         width: 40px;
@@ -17,12 +20,7 @@
 
     &-title{
         font-family: 'IM Fell English SC';
-    }
-
-
-    &-themeName {
-        margin-top: 16px;
-        font-size: 14px;
+        margin: 0;
     }
 
     &-themeSwitcherFrame {
@@ -46,7 +44,23 @@
     }
 }
 
-@include media-breakpoint-down(sm) {
+@media screen and (max-width: 576px) {
+    .header {
+        &-title {
+            font-size: 30px;
+        }
+ 
+        &-svg {
+         width: 30px;
+         height: 30px;
+        }
+        &-themeName,
+        &-themeSwitcherFrame {
+            margin-top: 0;
+        }
+    }
+}
+/* @include media-breakpoint-down(sm) {
    .header {
        &-title {
            font-size: 30px;
@@ -61,6 +75,6 @@
            margin-top: 0;
        }
    }
-}
+} */
 
 

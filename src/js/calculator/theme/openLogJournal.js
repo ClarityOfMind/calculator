@@ -1,12 +1,12 @@
 'use strict';
 
-function openLogJournal (calculator) {
-    let logJournalSwitcher = calculator.querySelector('.calculator-logJournalSwitcherFrame');
+function openLogJournal (id) {
+    let logJournalOpenButton = id.querySelector('.calculator-logJournalOpenButton');
     let state = 'closed';
     
 logJournalSwitcher.addEventListener ('click', () => {
-    let logJournalButton = calculator.querySelector('.calculator-logJournalSwitcherButton');
-    let logJournal = calculator.querySelector('.calculator-logJournal');
+    let logJournalButton = id.querySelector('.calculator-logJournalSwitcherButton');
+    let logJournal = id.querySelector('.calculator-logJournal');
         if (state === 'closed') {
             var logJournalAnimation = logJournalButton.animate([
                 {transform: 'translateX(0)'},
@@ -17,7 +17,7 @@ logJournalSwitcher.addEventListener ('click', () => {
                 logJournalButton.style.transform = 'translateX(18px)';
             });
 
-            logJournal.style.setProperty('height', '50px');
+            logJournal.classList.add('calculator-logJournal--opened');
             
             state = 'opened'
         } else {
@@ -30,7 +30,7 @@ logJournalSwitcher.addEventListener ('click', () => {
                 logJournalButton.style.transform = 'translateX(0)';
             });
 
-            logJournal.style.setProperty('height', '0');  
+            logJournal.classList.remove('calculator-logJournal--opened');  
 
             state = 'closed'    
         };
