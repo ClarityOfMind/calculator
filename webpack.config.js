@@ -11,13 +11,13 @@ var customConfiguration = function webpackConfig() {
     var config = {};
 
     const isProd = NODE_ENV === 'production';
-    const output = isProd ? 'dist/prod' : 'dist/dev';
+    const outputPath = isProd ? 'dist/prod' : 'dist/dev';
 
     /* config.context = (__dirname, 'src'); */
     config.entry = './src/js/index.js';
 
     config.output = {
-        path: path.resolve(__dirname, output),
+        path: path.resolve(__dirname, outputPath),
         filename: 'index.js'
         // publicPath: 'pathOrUrlWhenProductionBuild'
     };
