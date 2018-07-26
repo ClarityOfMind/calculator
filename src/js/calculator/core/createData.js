@@ -1,7 +1,8 @@
 'use strict';
-import LogJournal                  from '../log-journal/log-journal'; 
-import getKeyType                  from '../helpers/getKeyType';
+import LogJournal from '../log-journal/log-journal'; 
+import getKeyType from '../helpers/getKeyType';
 import removePressedOperatorButton from '../helpers/removePressedOperatorButton';
+
 import { calculate,
     scientificCalculate,
     calculatePercentage,
@@ -51,7 +52,7 @@ function createData(id, key) {
             break;
         case 'percentage':
             result = performForPercentage();
-            break;     
+            break;        
         case 'changeSign':
             result = changeSign();
             break;
