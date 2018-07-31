@@ -19,7 +19,7 @@ class Calculator  {
         this.display        = new Display (this.id); 
         this.menu           = new Menu (this.id);
         this.logJournal     = new LogJournal (this.id);
-        this.WebSocket      = new WebSocketRequestObject(this.id)
+        /* this.WebSocket      = new WebSocketRequestObject(this.id) */
     };
 
     init() { 
@@ -40,12 +40,28 @@ class Calculator  {
         this.modeSwitcher.addEventListener('click', this.menu.switchMode.bind(this.menu));
         this.logOpenButton.addEventListener('click', this.logJournal.openLogJournal.bind(this.logJournal));
         this.logClearButton.addEventListener('click', this.logJournal.clearLogJournal.bind(this.logJournal));
-        this.WebSocket.then(
+        this.secretButton.addEventListener('click', requestWebsocketServer().then(
             response => console.log(`Fulfilled: ${response}`),
-            error => alert(`Rejected: ${error}`)
-          );
+            error => alert(`Rejected: ${error}`))
+        );
         switchTheme (); 
     };
+};
+
+function requestWebsocketServer () {
+
+    return new Promise (function (resolve, reject) {
+        const ws = new WebSocket("ws://localhost:8081");
+        ws.send(display.textContent);
+        ws.onmessage = function (event) {
+            if (event.data === 'Error') {
+                reject (new Error ('Request to server has failed'))
+            } else {
+                resolve ('Data successesfully received')
+                display.textContent = event.data; // replaces value dispalyes with a data recived from server
+            };
+        };
+    });
 };
 
 export default Calculator;
