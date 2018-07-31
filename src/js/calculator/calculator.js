@@ -15,6 +15,7 @@ class Calculator  {
         this.modeSwitcher   = this.id.querySelector('.calculator-modeSwitcherFrame'); //Selects switcher button that changes calculator's mode to scientific and backwards
         this.logOpenButton  = this.id.querySelector('.calculator-logOpenButton'); // Selects icon that opens log journal 
         this.logClearButton = this.id.querySelector('.calculator-logClearButton'); // Selets ''trash' button that clers LOg journal
+        this.secretButton   = this.id.querySelector('.calculator-secretButton');
         this.display        = new Display (this.id); 
         this.menu           = new Menu (this.id);
         this.logJournal     = new LogJournal (this.id);
@@ -30,15 +31,19 @@ class Calculator  {
 
                 this.display.updateDisplay (displayData);
                 this.display.watchFontSize();
+                
             };
         });
 
-        // Hangs event listeners on all interacive buttons
+        // Hangs event listeners on all other interacive buttons
         this.burger.addEventListener('click', this.menu.openMenu.bind(this.menu));
         this.modeSwitcher.addEventListener('click', this.menu.switchMode.bind(this.menu));
         this.logOpenButton.addEventListener('click', this.logJournal.openLogJournal.bind(this.logJournal));
         this.logClearButton.addEventListener('click', this.logJournal.clearLogJournal.bind(this.logJournal));
-
+        this.WebSocket.then(
+            response => console.log(`Fulfilled: ${response}`),
+            error => alert(`Rejected: ${error}`)
+          );
         switchTheme (); 
     };
 };

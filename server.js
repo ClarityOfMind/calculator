@@ -7,12 +7,20 @@ const wss = new WebSocket.Server({ port: 8081 });
 
 wss.on('connection', function (ws) {
   ws.on('message', function(data) {
-    ws.send(getQuarter(data)); 
+    let chance = Math.random();
+    if (chance > 0.5) {
+      console.log(chance);
+      ws.send(getQuarter(data));
+    } else {
+      console.log(chance);
+      ws.send('Error')
+    }
+     
   });
 });
 
 // Runs static node.js server
-const file = new static.Server('./dist/prod', { cache: 0 });
+const file = new static.Server('./dist/dev', { cache: 0 });
 
 http.createServer(function(req, res) {
   file.serve(req, res);

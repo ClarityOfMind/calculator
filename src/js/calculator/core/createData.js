@@ -237,6 +237,22 @@ function createData(id, key) {
             subDisplay.textContent = '';
     };
 
+    /* function requestWebsocketServer () {
+
+        return new Promise (function (resolve, reject) {
+            const ws = new WebSocket("ws://localhost:8081");
+
+            ws.onmessage = function (event) {
+                if (event.data === 'Error') {
+                    reject (new Error ('Request to server has failed'))
+                } else {
+                    resolve ('Data successesfully received')
+                    display.textContent = event.data; // replaces value dispalyes with a data recived from server
+                };
+            };
+        });
+    }; */
+
     return result;
 };
 
