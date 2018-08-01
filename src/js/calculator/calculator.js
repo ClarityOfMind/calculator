@@ -5,7 +5,7 @@ import Display from './display/display';
 import Menu from './menu/menu';  
 import LogJournal from './log-journal/log-journal';  
 import switchTheme from '../calculator/theme/switchTheme';
-import WebSocketRequestObject from './server_request/server_request_object';
+import requestWebsocketServer from './server_request/request_websocket_server';
 
 class Calculator  {
     constructor(id) {
@@ -19,10 +19,10 @@ class Calculator  {
         this.display        = new Display (this.id); 
         this.menu           = new Menu (this.id);
         this.logJournal     = new LogJournal (this.id);
-        /* this.WebSocket      = new WebSocketRequestObject(this.id) */
     };
 
-    init() { 
+    init() {
+        const display = this.id.querySelector('.calculator-display'); 
         this.keys.addEventListener('click', e => {
         //Hangs event listener if any calculator key is pushed    
             if (e.target.matches('button')) {
@@ -40,29 +40,26 @@ class Calculator  {
         this.modeSwitcher.addEventListener('click', this.menu.switchMode.bind(this.menu));
         this.logOpenButton.addEventListener('click', this.logJournal.openLogJournal.bind(this.logJournal));
         this.logClearButton.addEventListener('click', this.logJournal.clearLogJournal.bind(this.logJournal));
-        this.secretButton.addEventListener('click', requestWebsocketServer().then(
-            response => console.log(`Fulfilled: ${response}`),
-            error => alert(`Rejected: ${error}`))
-        );
+        
+        this.secretButton.addEventListener('click', function () {
+            requestWebsocketServer().then(
+            ws => { // this argument passed by resolve function upon WebSocket server opening
+                ws.send(display.textContent);
+                return ws
+            })
+            .then(ws => {
+                ws.onmessage = event => {
+                    display.textContent = event.data; // replaces value dispalyes with a data recived from server
+                };
+            })
+            .catch(error => alert(error));
+        });
+
         switchTheme (); 
     };
 };
 
-function requestWebsocketServer () {
 
-    return new Promise (function (resolve, reject) {
-        const ws = new WebSocket("ws://localhost:8081");
-        ws.send(display.textContent);
-        ws.onmessage = function (event) {
-            if (event.data === 'Error') {
-                reject (new Error ('Request to server has failed'))
-            } else {
-                resolve ('Data successesfully received')
-                display.textContent = event.data; // replaces value dispalyes with a data recived from server
-            };
-        };
-    });
-};
 
 export default Calculator;
 

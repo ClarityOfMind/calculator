@@ -7,13 +7,13 @@ const wss = new WebSocket.Server({ port: 8081 });
 
 wss.on('connection', function (ws) {
   ws.on('message', function(data) {
-    let chance = Math.random();
-    if (chance > 0.5) {
-      console.log(chance);
+    let errorChance = Math.random();
+    if (errorChance > 0.5) {
+      console.log(errorChance);
       ws.send(getQuarter(data));
     } else {
-      console.log(chance);
-      ws.send('Error')
+      console.log(errorChance);
+      ws.emit('error', new Erorr ('Server is not available'))
     }
      
   });

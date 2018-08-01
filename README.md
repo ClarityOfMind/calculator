@@ -12,7 +12,11 @@
 git clone https://github.com/ClarityOfMind/lecture_09.git
 ```
 
-2.  Open `index.html` in your browser
+2.  Start up local static server
+
+```sh
+npm run start
+```
 
 ## Development installation
 

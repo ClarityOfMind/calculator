@@ -28,10 +28,7 @@
   },
   "homepage": "https://github.com/ClarityOfMind/lecture_09#readme",
   "dependencies": {
-    "animate.css": "^3.6.1",
-    "jquery": "^3.3.1",
-    "bootstrap": "^4.1.1",
-    "popper.js": "^1.14.3"
+    "ws": "^6.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -53,7 +50,6 @@
     "sass-autoprefixer": "^1.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.10.2",
-    "webpack-cli": "^2.1.5",
-    "ws": "^6.0.0"
+    "webpack-cli": "^2.1.5"
   }
 }
